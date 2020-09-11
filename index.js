@@ -1,5 +1,5 @@
 window.addEventListener('load', function (){
-    let masonryWrapper = $('#masonryElem');
+    let masonryWrapper = $('#myMasonry');
     if(!masonryWrapper.length) return ;
 
     let allItems = masonryWrapper.children(),
