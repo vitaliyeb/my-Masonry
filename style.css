@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#myMasonry{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: brown;
+    min-height: 200px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    align-content: flex-start;
+    --h: 50px;
+    margin-top: 50px;
+}
+
+.item{
+    background-color: cadetblue;
+    height: var(--h);
+}
+.item_h2{
+    height: calc(var(--h) * 2);
+}
+.item_h3{
+    height: calc(var(--h) * 3);
+}
