@@ -4,15 +4,13 @@ window.addEventListener('load', function (){
 
     let allItems = masonryWrapper.children(),
         rowSize = 10,
-        rowGap = 5,
-        currenRow = 0,
-        counterCol = 0,
+        rowGap = parseInt(masonryWrapper.css('row-gap')),
         columnGap = parseInt(masonryWrapper.css('column-gap')),
         itemWidth = Number($(allItems[0]).width()),
         wrapperWidth = Number(masonryWrapper.width()),
         countColomn = Math.ceil(wrapperWidth / (itemWidth+columnGap)),
         fullRowSize = rowSize + rowGap,
-        rowCount = masonryWrapper.height() / fullRowSize,
+        rowCount = Math.ceil(masonryWrapper.height() / fullRowSize),
         map = [],
         currentRowSort = [];
 
@@ -25,7 +23,13 @@ window.addEventListener('load', function (){
                     createFirstRow(row, col, el);
                     continue;
                 };
-                if (!el) continue;
+                if (!el) {
+                    currentRowSort.push({
+                        $el: false,
+                        rowBusy: 0
+                    });
+                    continue;
+                };
                 currentRowSort.push({
                     $el: $(el),
                     rowBusy: Math.ceil($(el).height() / fullRowSize)
@@ -37,12 +41,17 @@ window.addEventListener('load', function (){
 
         function createRow(row) {
             let predRow = map[row-1].map((el, ind)=>({bussyAll: el.bussyAll, ind}));
+            
             currentRowSort.sort((e1, e2)=> e2.rowBusy - e1.rowBusy);
+
             predRow.sort((el1, el2)=>el1.bussyAll - el2.bussyAll);
+
             currentRowSort.map((el, i)=>{
                 let predElem = predRow[i];
 
-                map[row][predElem['ind']] = {
+                map[row][predElem['ind']] = 
+                {
+                    rowBusy: el.rowBusy,
                     bussyAll: predElem.bussyAll + el.rowBusy
                 }
             });
@@ -53,13 +62,18 @@ window.addEventListener('load', function (){
             let busyRow = Math.ceil($el.height() / fullRowSize);
 
             map[row][col] = {
+                el,
                 busyRow,
                 bussyAll: busyRow
             }
         }
 
+        function setGridParams(row, col, el) {
+            
+        }
 
-    masonryWrapper.css('grid-template-rows', `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`);
+
+    // masonryWrapper.css('grid-template-rows', `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`);
 
     console.log(map)
 
