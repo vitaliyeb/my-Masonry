@@ -40,9 +40,12 @@ window.addEventListener('load', function (){
             currentRowSort.sort((e1, e2)=> e2.rowBusy - e1.rowBusy);
             predRow.sort((el1, el2)=>el1.bussyAll - el2.bussyAll);
             currentRowSort.map((el, i)=>{
+                let predElem = predRow[i];
 
+                map[row][predElem['ind']] = {
+                    bussyAll: predElem.bussyAll + el.rowBusy
+                }
             });
-            console.log(currentRowSort, predRow);
         }
 
         function createFirstRow(row, col, el){
@@ -58,6 +61,7 @@ window.addEventListener('load', function (){
 
     masonryWrapper.css('grid-template-rows', `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`);
 
+    console.log(map)
 
 
 
