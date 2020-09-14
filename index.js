@@ -37,8 +37,12 @@ window.addEventListener('load', function (){
             }
             if (currentRowSort.length) createRow(row);
             
+           
             setGridParams(map[row]);
+            
         };
+
+
 
         function createRow(row) {
             let predRow = map[row-1].map((el, ind)=>({bussyAll: el.bussyAll, ind}));
@@ -65,13 +69,17 @@ window.addEventListener('load', function (){
 
             map[row][col] = {
                 el,
-                rowStart: 0,
+                rowStart: 1,
                 bussyAll: busyRow
             }
         }
 
         function setGridParams(row) {
-            row.map((el, ind)=>{
+            row.map((item, ind)=>{
+                if(!item.el) return;
+                console.log(item, `${item.rowStart} / ${item.bussyAll}`);
+                item.el.style.gridRow = `${item.rowStart} / ${item.bussyAll}`;
+                item.el.style.gridColumn = `${ind+1} / ${ind+2}`;
                
             });
         }
