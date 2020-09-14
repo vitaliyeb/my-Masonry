@@ -1,18 +1,19 @@
 window.addEventListener('load', function (){
-    let masonryWrapper = $('#myMasonry');
-    if(!masonryWrapper.length) return ;
+    let masonryWrapper = document.getElementById('myMasonry');
+    if(!masonryWrapper) return ;
 
-    let allItems = masonryWrapper.children(),
+    let allItems = masonryWrapper.children,
         rowSize = 10,
-        rowGap = parseInt(masonryWrapper.css('row-gap')),
-        columnGap = parseInt(masonryWrapper.css('column-gap')),
-        itemWidth = Number($(allItems[0]).width()),
-        wrapperWidth = Number(masonryWrapper.width()),
+        rowGap = parseInt(getComputedStyle(masonryWrapper).rowGap),
+        columnGap = parseInt(getComputedStyle(masonryWrapper).columnGap),
+        itemWidth = Number(allItems[0].offsetWidth ),
+        wrapperWidth = Number(masonryWrapper.offsetWidth),
         countColomn = Math.ceil(wrapperWidth / (itemWidth+columnGap)),
         fullRowSize = rowSize + rowGap,
-        rowCount = Math.ceil(masonryWrapper.height() / fullRowSize),
+        rowCount = Math.ceil(masonryWrapper.offsetHeight / fullRowSize),
         map = [],
         currentRowSort = [];
+        console.log( rowGap, columnGap, itemWidth, wrapperWidth, countColomn);
 
         for (let row = 0; row < Math.ceil(allItems.length / countColomn); row++){
             currentRowSort= [];
@@ -84,7 +85,7 @@ window.addEventListener('load', function (){
         }
 
 
-    masonryWrapper.css('grid-template-rows', `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`);
+    masonryWrapper.style.gridTemplateRows =  `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`;
 
     console.log(map)
 
