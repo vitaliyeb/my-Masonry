@@ -38,7 +38,7 @@ window.addEventListener('load', function (){
             if (currentRowSort.length) createRow(row);
             
            
-            setGridParams(map[row]);
+            setGridParams(map[row], row);
             
         };
 
@@ -74,11 +74,10 @@ window.addEventListener('load', function (){
             }
         }
 
-        function setGridParams(row) {
+        function setGridParams(row, rowInd) {
             row.map((item, ind)=>{
                 if(!item.el) return;
-                console.log(item, `${item.rowStart} / ${item.bussyAll}`);
-                item.el.style.gridRow = `${item.rowStart} / ${item.bussyAll}`;
+                item.el.style.gridRow = `${item.rowStart || map[rowInd - 1][ind].bussyAll + 1} / ${item.bussyAll}`;
                 item.el.style.gridColumn = `${ind+1} / ${ind+2}`;
                
             });
