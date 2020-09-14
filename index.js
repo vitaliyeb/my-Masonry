@@ -35,8 +35,9 @@ window.addEventListener('load', function (){
                     rowBusy: Math.ceil($(el).height() / fullRowSize)
                 });
             }
-            if (!currentRowSort.length) continue;
-            createRow(row);
+            if (currentRowSort.length) createRow(row);
+            
+            setGridParams(map[row]);
         };
 
         function createRow(row) {
@@ -51,6 +52,7 @@ window.addEventListener('load', function (){
 
                 map[row][predElem['ind']] = 
                 {
+                    el: el.$el[0],
                     rowBusy: el.rowBusy,
                     bussyAll: predElem.bussyAll + el.rowBusy
                 }
@@ -63,17 +65,19 @@ window.addEventListener('load', function (){
 
             map[row][col] = {
                 el,
-                busyRow,
+                rowStart: 0,
                 bussyAll: busyRow
             }
         }
 
-        function setGridParams(row, col, el) {
-            
+        function setGridParams(row) {
+            row.map((el, ind)=>{
+               
+            });
         }
 
 
-    // masonryWrapper.css('grid-template-rows', `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`);
+    masonryWrapper.css('grid-template-rows', `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`);
 
     console.log(map)
 
