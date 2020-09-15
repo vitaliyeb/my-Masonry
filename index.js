@@ -11,37 +11,43 @@ window.addEventListener('load', function (){
         countColomn = Math.ceil(wrapperWidth / (itemWidth+columnGap)),
         fullRowSize = rowSize + rowGap,
         rowCount = Math.ceil(masonryWrapper.offsetHeight / fullRowSize),
-        map = [],
-        currentRowSort = [];
-        console.log( rowGap, columnGap, itemWidth, wrapperWidth, countColomn);
+        map = [];
 
         for (let row = 0; row < Math.ceil(allItems.length / countColomn); row++){
-            currentRowSort= [];
-            map.push([]);
+            let currentRow = [];
             for (let col = 0; col < countColomn; col++ ){
-                let el = allItems[row*countColomn+col];
-                if (row === 0) {
-                    createFirstRow(row, col, el);
-                    continue;
-                };
-                if (!el) {
-                    currentRowSort.push({
-                        $el: false,
-                        rowBusy: 0
-                    });
-                    continue;
-                };
-                currentRowSort.push({
-                    $el: $(el),
-                    rowBusy: Math.ceil($(el).height() / fullRowSize)
-                });
+
             }
-            if (currentRowSort.length) createRow(row);
+        }
+
+
+        // for (let row = 0; row < Math.ceil(allItems.length / countColomn); row++){
+        //     currentRowSort= [];
+        //     map.push([]);
+        //     for (let col = 0; col < countColomn; col++ ){
+        //         let el = allItems[row*countColomn+col];
+        //         if (row === 0) {
+        //             createFirstRow(row, col, el);
+        //             continue;
+        //         };
+        //         if (!el) {
+        //             currentRowSort.push({
+        //                 $el: false,
+        //                 rowBusy: 0
+        //             });
+        //             continue;
+        //         };
+        //         currentRowSort.push({
+        //             $el: $(el),
+        //             rowBusy: Math.ceil($(el).height() / fullRowSize)
+        //         });
+        //     }
+        //     if (currentRowSort.length) createRow(row);
             
            
-            setGridParams(map[row], row);
+        //     setGridParams(map[row], row);
             
-        };
+        // };
 
 
 
