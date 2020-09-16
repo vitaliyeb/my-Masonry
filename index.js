@@ -16,8 +16,14 @@ window.addEventListener('load', function (){
         for (let row = 0; row < Math.ceil(allItems.length / countColomn); row++){
             let currentRow = [];
             for (let col = 0; col < countColomn; col++ ){
+                let el = allItems[row * countColomn + col];
+                currentRow.push({
+                    el,
+                    rowBussy: el ? Math.ceil(el.offsetHeight / fullRowSize) : 0
 
+                });
             }
+            map.push(currentRow);
         }
 
 
@@ -25,13 +31,6 @@ window.addEventListener('load', function (){
         //     currentRowSort= [];
         //     map.push([]);
         //     for (let col = 0; col < countColomn; col++ ){
-        //         let el = allItems[row*countColomn+col];
-        //         if (row === 0) {
-        //             createFirstRow(row, col, el);
-        //             continue;
-        //         };
-        //         if (!el) {
-        //             currentRowSort.push({
         //                 $el: false,
         //                 rowBusy: 0
         //             });
