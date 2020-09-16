@@ -17,15 +17,36 @@ window.addEventListener('load', function (){
             let currentRow = [];
             for (let col = 0; col < countColomn; col++ ){
                 let el = allItems[row * countColomn + col];
+                let rowBusy = el ? Math.ceil(el.offsetHeight / fullRowSize) : 0;
                 currentRow.push({
                     el,
-                    rowBussy: el ? Math.ceil(el.offsetHeight / fullRowSize) : 0
-
+                    rowBusy,
+                    busyAll: row === 0 ? rowBusy : undefined
                 });
             }
-            map.push(currentRow);
+            sortCurrentRow(currentRow, row);
         }
 
+
+        function sortCurrentRow(currentRow, rowIndex) {
+            if(rowIndex === 0) return map.push(currentRow);
+            map[rowIndex] = [];
+            
+            let predRow = map[rowIndex-1].map((item, ind)=>({
+                index: ind,
+                busyAll: item.busyAll
+            }));
+
+            currentRow.sort((itemBefore, item)=> item.rowBusy - itemBefore.rowBusy);
+            predRow.sort((itemBefore, item)=> itemBefore.busyAll - item.busyAll);
+
+            predRow.map(({index, busyAll}, i)=>{
+                map[rowIndex][index] = {
+                    ...currentRow[i],
+                    busyAll: busyAll + currentRow[i].rowBusy
+                }
+            });
+        }
 
         // for (let row = 0; row < Math.ceil(allItems.length / countColomn); row++){
         //     currentRowSort= [];
