@@ -4,7 +4,7 @@ window.addEventListener('load', function (){
 
     let allItems = masonryWrapper.children,
         rowSize = 10,
-        rowGap = parseInt(getComputedStyle(masonryWrapper).rowGap),
+        rowGap = parseInt(getComputedStyle(masonryWrapper).rowGap) || 0,
         columnGap = parseInt(getComputedStyle(masonryWrapper).columnGap),
         itemWidth = Number(allItems[0].offsetWidth ),
         wrapperWidth = Number(masonryWrapper.offsetWidth),
@@ -52,14 +52,13 @@ window.addEventListener('load', function (){
         function setGridParams(row, rowInd) {
             row.map(({el, rowBusy, busyAll}, ind)=>{
                 if(!el) return;
-                el.style.gridRow = `${busyAll - rowBusy + 1} / ${busyAll}`;
+                el.style.gridRow = `${busyAll - rowBusy + 1} / ${busyAll + 1}`;
                 el.style.gridColumn = `${ind+1} / ${ind+2}`;
-               
             });
         }
 
-
-    masonryWrapper.style.gridTemplateRows =  `repeat(${Math.ceil(rowCount)}, ${rowGap}px)`;
+        console.log(rowSize);
+    masonryWrapper.style.gridTemplateRows =  `repeat(${Math.ceil(rowCount) }, ${rowSize}px)`;
 
     console.log(map)
 

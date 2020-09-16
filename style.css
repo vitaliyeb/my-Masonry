@@ -10,20 +10,25 @@
     background-color: brown;
     min-height: 200px;
     display: grid;
-    grid-gap: 10px;
+    row-gap: 20px;
+    align-items: flex-start;
+    grid-column-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     align-content: flex-start;
-    --h: 50px;
+    /* --h: 50px; */
     margin-top: 50px;
 }
 
 .item{
     background-color: cadetblue;
     height: var(--h);
+    width: 100%;
 }
 .item_h2{
     height: calc(var(--h) * 2);
+    background-color: #5a719b;
 }
 .item_h3{
     height: calc(var(--h) * 3);
+    background-color: #306643;
 }
