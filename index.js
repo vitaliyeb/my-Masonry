@@ -17,7 +17,7 @@ window.addEventListener('load', function (){
             let currentRow = [];
             for (let col = 0; col < countColomn; col++ ){
                 let el = allItems[row * countColomn + col];
-                let rowBusy = el ? Math.ceil(el.offsetHeight / fullRowSize) : 0;
+                let rowBusy = el ? Math.ceil(el.offsetHeight / fullRowSize) + 1 : 0;
                 currentRow.push({
                     el,
                     rowBusy,
@@ -44,7 +44,7 @@ window.addEventListener('load', function (){
             predRow.map(({index, busyAll}, i)=>{
                 map[rowIndex][index] = {
                     ...currentRow[i],
-                    busyAll: busyAll + currentRow[i].rowBusy
+                    busyAll: busyAll + currentRow[i].rowBusy + 1
                 }
             });
         }
