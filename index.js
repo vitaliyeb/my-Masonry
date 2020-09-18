@@ -17,7 +17,7 @@ window.addEventListener('load', function (){
             let currentRow = [];
             for (let col = 0; col < countColomn; col++ ){
                 let el = allItems[row * countColomn + col];
-                let rowBusy = el ? Math.ceil(el.offsetHeight / fullRowSize) + 1 : 0;
+                let rowBusy = el ? Math.ceil(el.offsetHeight / fullRowSize) + 1 : -1;
                 currentRow.push({
                     el,
                     rowBusy,
@@ -27,7 +27,7 @@ window.addEventListener('load', function (){
             sortCurrentRow(currentRow, row);
             setGridParams(map[row], row);
         }
-
+        setLastParams();
 
         function sortCurrentRow(currentRow, rowIndex) {
             if(rowIndex === 0) return map.push(currentRow);
@@ -57,16 +57,16 @@ window.addEventListener('load', function (){
             });
         }
 
-        console.log(rowSize);
-    masonryWrapper.style.gridTemplateRows =  `repeat(${Math.ceil(rowCount) }, ${rowSize}px)`;
-    masonryWrapper.style.alignItems = 'stretch';
-
-    console.log(map)
-
-
-
+        function setLastParams() {
+            let maxRowCount = Math.max(...map[map.length-1].map(item=>item.busyAll));
+            masonryWrapper.style.gridTemplateRows =  `repeat(${ maxRowCount }, ${rowSize}px)`;
+            masonryWrapper.style.alignItems = 'stretch';
+        }
+    
 
 
+
+console.log(map);
 
 
 
