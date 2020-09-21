@@ -4,10 +4,12 @@ window.addEventListener('load', function (){
 
     let allItems = masonryWrapper.children,
         rowSize = 5,
-        rowGap = parseInt(getComputedStyle(masonryWrapper).rowGap) || 0,
-        columnGap = parseInt(getComputedStyle(masonryWrapper).columnGap),
+        cssDatamasonryWrapper = getComputedStyle(masonryWrapper),
+        rowGap = parseInt(cssDatamasonryWrapper.rowGap) || 0,
+        columnGap = parseInt(cssDatamasonryWrapper.columnGap),
         itemWidth = Number(allItems[0].offsetWidth ),
-        wrapperWidth = Number(masonryWrapper.offsetWidth),
+        wrapperWidth =
+         Number(masonryWrapper.offsetWidth - parseInt(cssDatamasonryWrapper.paddingLeft) - parseInt(cssDatamasonryWrapper.paddingRight)),
         countColomn = Math.ceil(wrapperWidth / (itemWidth+columnGap)),
         fullRowSize = rowSize + rowGap,
         rowCount = Math.ceil(masonryWrapper.offsetHeight / fullRowSize),
@@ -52,6 +54,7 @@ window.addEventListener('load', function (){
         function setGridParams(row, rowInd) {
             row.map(({el, rowBusy, busyAll}, ind)=>{
                 if(!el) return;
+                el.style.height = 'auto';
                 el.style.gridRow = `${busyAll - rowBusy + (rowInd === 0 ? 1 : 0) } / ${busyAll + 1}`;
                 el.style.gridColumn = `${ind+1} / ${ind+2}`;
             });
@@ -62,13 +65,8 @@ window.addEventListener('load', function (){
             masonryWrapper.style.gridTemplateRows =  `repeat(${ maxRowCount }, ${rowSize}px)`;
             masonryWrapper.style.alignItems = 'stretch';
         }
+
+     
     
-
-
-
-console.log(map);
-
-
-
 
 });
