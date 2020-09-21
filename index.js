@@ -76,4 +76,4 @@
 })();
 
 
-myMasonry(document.getElementById('myMasonry'));
+// myMasonry(document.getElementById('myMasonry'));
